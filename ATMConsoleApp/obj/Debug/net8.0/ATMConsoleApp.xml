@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ATMConsoleApp</name>
+    </assembly>
+    <members>
+        <member name="T:ATMConsoleApp.DataAccess.IAccountRepository">
+            <summary>
+            Defines the contract for account data access operations.
+            </summary>
+        </member>
+        <member name="M:ATMConsoleApp.DataAccess.IAccountRepository.GetAccountByLoginAndPin(System.String,System.String)">
+            <summary>
+            Retrieves an account by login and PIN.
+            </summary>
+            <param name="login">The username.</param>
+            <param name="pin">The 5-digit PIN.</param>
+            <returns>The matched account, or null.</returns>
+        </member>
+        <member name="M:ATMConsoleApp.DataAccess.IAccountRepository.GetAccountById(System.Int32)">
+            <summary>
+            Retrieves an account by its ID.
+            </summary>
+            <param name="accountId">The account ID.</param>
+            <returns>The matched account, or null.</returns>
+        </member>
+        <member name="M:ATMConsoleApp.DataAccess.IAccountRepository.UpdateAccountBalance(System.Int32,System.Decimal)">
+            <summary>
+            Updates the balance of a specific account.
+            </summary>
+            <param name="accountId">The account ID.</param>
+            <param name="newBalance">The new balance.</param>
+        </member>
+        <member name="T:ATMConsoleApp.DataAccess.MySqlAccountRepository">
+            <summary>
+            Provides data access operations for ATM Accounts using a MySQL database.
+            </summary>
+        </member>
+        <member name="M:ATMConsoleApp.DataAccess.MySqlAccountRepository.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ATMConsoleApp.DataAccess.MySqlAccountRepository"/> class.
+            </summary>
+            <param name="connectionString">The MySQL database connection string.</param>
+        </member>
+        <member name="M:ATMConsoleApp.DataAccess.MySqlAccountRepository.GetAccountById(System.Int32)">
+            <summary>
+            Retrieves an account by its unique ID.
+            </summary>
+            <param name="accountId">The unique identifier for the account.</param>
+            <returns>An <see cref="T:ATMConsoleApp.Models.Account"/> object if found; otherwise, null.</returns>
+        </member>
+        <member name="M:ATMConsoleApp.DataAccess.MySqlAccountRepository.GetAccountByLoginAndPin(System.String,System.String)">
+            <summary>
+            Authenticates a user and retrieves their account based on login and PIN.
+            </summary>
+            <param name="login">The user's login username.</param>
+            <param name="pin">The user's 5-digit PIN.</param>
+            <returns>An <see cref="T:ATMConsoleApp.Models.Account"/> object if credentials match; otherwise, null.</returns>
+        </member>
+        <member name="M:ATMConsoleApp.DataAccess.MySqlAccountRepository.UpdateAccountBalance(System.Int32,System.Decimal)">
+            <summary>
+            Updates the financial balance of a specific account in the database.
+            </summary>
+            <param name="accountId">The unique identifier of the account to update.</param>
+            <param name="newBalance">The new balance to set.</param>
+        </member>
+        <member name="T:ATMConsoleApp.Models.Account">
+            <summary>
+            Represents a user account in the ATM system.
+            </summary>
+        </member>
+        <member name="P:ATMConsoleApp.Models.Account.AccountId">
+            <summary>
+            Gets the unique account identifier.
+            </summary>
+        </member>
+        <member name="P:ATMConsoleApp.Models.Account.Login">
+            <summary>
+            Gets the login username.
+            </summary>
+        </member>
+        <member name="P:ATMConsoleApp.Models.Account.PinCode">
+            <summary>
+            Gets the 5-digit pin code.
+            </summary>
+        </member>
+        <member name="P:ATMConsoleApp.Models.Account.Role">
+            <summary>
+            Gets the role of the user (Customer or Administrator).
+            </summary>
+        </member>
+        <member name="P:ATMConsoleApp.Models.Account.HolderName">
+            <summary>
+            Gets the full name of the account holder.
+            </summary>
+        </member>
+        <member name="P:ATMConsoleApp.Models.Account.Balance">
+            <summary>
+            Gets the current financial balance of the account.
+            </summary>
+        </member>
+        <member name="P:ATMConsoleApp.Models.Account.Status">
+            <summary>
+            Gets the active or disabled status of the account.
+            </summary>
+        </member>
+        <member name="M:ATMConsoleApp.Models.Account.UpdateBalance(System.Decimal)">
+            <summary>
+            Updates the balance of the account.
+            </summary>
+            <param name="newBalance">The new balance to apply.</param>
+        </member>
+        <member name="T:ATMConsoleApp.Program">
+            <summary>
+            The main entry point class for the ATM application.
+            </summary>
+        </member>
+        <member name="M:ATMConsoleApp.Program.Main(System.String[])">
+            <summary>
+            The main entry point method.
+            </summary>
+            <param name="args">Command line arguments.</param>
+        </member>
+        <member name="T:ATMConsoleApp.Services.IAtmService">
+            <summary>
+            Defines the contract for ATM business logic.
+            </summary>
+        </member>
+        <member name="M:ATMConsoleApp.Services.IAtmService.Withdraw(System.Int32,System.Decimal,System.String@)">
+            <summary>
+            Processes a cash withdrawal.
+            </summary>
+            <param name="accountId">The account ID.</param>
+            <param name="amount">The amount to withdraw.</param>
+            <param name="errorMessage">Output parameter containing the error message if the withdrawal fails.</param>
+            <returns>True if successful, otherwise false.</returns>
+        </member>
+        <member name="T:ATMConsoleApp.Services.AtmService">
+            <summary>
+            Implements the ATM business logic and transaction validations.
+            </summary>
+        </member>
+        <member name="M:ATMConsoleApp.Services.AtmService.#ctor(ATMConsoleApp.DataAccess.IAccountRepository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ATMConsoleApp.Services.AtmService"/> class.
+            </summary>
+            <param name="repository">The injected account repository.</param>
+        </member>
+        <member name="M:ATMConsoleApp.Services.AtmService.Withdraw(System.Int32,System.Decimal,System.String@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ATMConsoleApp.UI.ConsoleMenu">
+            <summary>
+            Handles all console-based user interaction and rendering.
+            </summary>
+        </member>
+        <member name="M:ATMConsoleApp.UI.ConsoleMenu.#ctor(ATMConsoleApp.Services.IAtmService,ATMConsoleApp.DataAccess.IAccountRepository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ATMConsoleApp.UI.ConsoleMenu"/> class.
+            </summary>
+            <param name="atmService">The ATM business logic service.</param>
+            <param name="repository">The account data repository.</param>
+        </member>
+        <member name="M:ATMConsoleApp.UI.ConsoleMenu.Start">
+            <summary>
+            Starts the main application loop.
+            </summary>
+        </member>
+    </members>
+</doc>

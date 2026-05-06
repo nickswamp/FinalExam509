@@ -1,0 +1,27 @@
+# top-most EditorConfig file
+root = true
+
+# All files
+[*]
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# C# files
+[*.cs]
+dotnet_sort_system_directives_first = true
+csharp_style_var_when_type_is_apparent = true:suggestion
+csharp_prefer_braces = true:warning
+
+# --- STYLECOP OVERRIDES ---
+# Allow using directives outside of namespaces (Modern C# standard)
+dotnet_diagnostic.SA1200.severity = none
+# Do not require file header comments
+dotnet_diagnostic.SA1633.severity = none
+# Allow '_' prefix for private fields (Modern C# standard)
+dotnet_diagnostic.SA1309.severity = none
+# Do not require 'this.' prefix for local calls (Modern C# standard)
+dotnet_diagnostic.SA1101.severity = none
+# Do not require trailing commas in multi-line initializers
+dotnet_diagnostic.SA1413.severity = none
