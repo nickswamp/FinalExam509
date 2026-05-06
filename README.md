@@ -39,7 +39,11 @@ flowchart LR
     Admin --> UAI
     Admin --> SFA
     Admin --> LO
+```
 
+## 2. System Architecture Diagram
+
+```mermaid
 flowchart TD
     %% User Interaction
     User((User))
@@ -69,3 +73,4 @@ flowchart TD
     %% Styling
     classDef layer fill:#f9f9f9,stroke:#333,stroke-width:2px;
     class Presentation Layer,Business Logic Layer,Data Access Layer layer;
+```
