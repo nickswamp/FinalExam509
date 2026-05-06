@@ -1,6 +1,5 @@
 name: ATM System CI/CD
 
-# This tells GitHub to run this script every time you push code to the main branch
 on:
   push:
     branches: [ "main" ]
@@ -10,43 +9,35 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    # This silences the Node 20 deprecation warning
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
-    # 1. Grab your code from the repository
     - name: Checkout Code
       uses: actions/checkout@v4
 
-    # 2. Install the .NET 8 SDK on the cloud server
     - name: Setup .NET 8
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
 
-    # 3. Restore all NuGet packages (like MySql.Data, Moq, etc.)
     - name: Restore dependencies
       run: dotnet restore
 
-    # 4. Build the code and Run the Linter
-    # Because we added StyleCop to the .csproj, this step will automatically fail
-    # if there are any formatting errors, satisfying the professor's requirement!
     - name: Build and Lint (Release Mode)
       run: dotnet build --configuration Release --no-restore
 
-    # 5. Run the Unit Tests and generate Code Coverage
     - name: Run Unit Tests
       run: dotnet test --configuration Release --no-build --verbosity normal -p:CollectCoverage=true -p:CoverletOutputFormat=opencover
 
-    # 6. Upload Coverage to Codecov
-    # You don't need an account for public repositories; this action handles it automatically.
+    # Updated to v5 to match Codecov's new standards
     - name: Upload coverage reports to Codecov
-      uses: codecov/codecov-action@v4
+      uses: codecov/codecov-action@v5
       with:
-        file: '**/coverage.opencover.xml'
-        token: ${{ secrets.CODECOV_TOKEN }} # Optional for public repos, but good practice
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: '**/coverage.opencover.xml'
 
-    # 7. Publish the C# XML Documentation
-    # The build step automatically generated ATMConsoleApp.xml based on your /// comments.
-    # This step saves that file as a downloadable artifact on GitHub, satisfying the "publish" requirement.
     - name: Publish Documentation Artifact
       uses: actions/upload-artifact@v4
       with:
