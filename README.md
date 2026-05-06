@@ -1,3 +1,7 @@
+# ATM System Architecture
+
+## 1. Use Case Diagram
+```mermaid
 flowchart LR
     %% Actors
     Cust([👤 Customer])
