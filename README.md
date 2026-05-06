@@ -48,15 +48,15 @@ flowchart TD
     %% User Interaction
     User((User))
     
-    subgraph Presentation Layer [1. Presentation Layer]
+    subgraph PresentationLayer [1. Presentation Layer]
         UI[ConsoleMenu.cs\nHandles I/O]
     end
 
-    subgraph Business Logic Layer [2. Business Logic Layer]
+    subgraph BusinessLogicLayer [2. Business Logic Layer]
         Service[AtmService.cs\nValidates Rules]
     end
 
-    subgraph Data Access Layer [3. Data Access Layer]
+    subgraph DataAccessLayer [3. Data Access Layer]
         Repo[MySqlAccountRepository.cs\nExecutes Queries]
     end
 
@@ -72,5 +72,4 @@ flowchart TD
 
     %% Styling
     classDef layer fill:#f9f9f9,stroke:#333,stroke-width:2px;
-    class Presentation Layer,Business Logic Layer,Data Access Layer layer;
-```
+    class PresentationLayer,BusinessLogicLayer,DataAccessLayer layer;
