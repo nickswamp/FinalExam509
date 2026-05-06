@@ -1,6 +1,7 @@
 # ATM System Architecture
 
 ## 1. Use Case Diagram
+
 ```mermaid
 flowchart LR
     %% Actors
@@ -39,7 +40,7 @@ flowchart LR
     Admin --> SFA
     Admin --> LO
 
-    flowchart TD
+flowchart TD
     %% User Interaction
     User((User))
     
